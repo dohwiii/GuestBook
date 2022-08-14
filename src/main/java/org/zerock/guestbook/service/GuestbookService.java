@@ -9,6 +9,8 @@ public interface GuestbookService {
 
     Long register(GuestbookDTO dto);
 
+    GuestbookDTO read(Long gno);
+
     PageResultDTO<Guestbook, GuestbookDTO> getList(PageRequestDTO requestDTO);
 
     default Guestbook dtoToEntity(GuestbookDTO dto) {

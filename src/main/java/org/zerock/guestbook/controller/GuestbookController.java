@@ -7,16 +7,18 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.guestbook.dto.GuestbookDTO;
 import org.zerock.guestbook.dto.PageRequestDTO;
+import org.zerock.guestbook.entity.Guestbook;
 import org.zerock.guestbook.service.GuestbookService;
 
 @Controller
 @RequestMapping("/guestbook")
-@RequiredArgsConstructor
+@RequiredArgsConstructor //의존성 자동 주입
 @Log4j2
 public class GuestbookController {
 
@@ -50,7 +52,15 @@ public class GuestbookController {
         redirectAttributes.addFlashAttribute("msg", gno);
 
         return "redirect:/guestbook/list";
+    }
 
+    @GetMapping("/read")
+    public void read(long gno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
 
+        log.info("gno: " + gno);
+
+        GuestbookDTO dto = service.read(gno);
+
+        model.addAttribute("dto", dto);
     }
 }
