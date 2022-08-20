@@ -42,7 +42,7 @@ public class PageResultDTO<EN, DTO> { //파라미터를 entity -> dto 변환해�
         int tempEnd = (int) (Math.ceil(page / 10.0)) * 10;
 
         start = tempEnd - 9;
-        prev = start >1;
+        prev = start > 1;
         end = totalPage > tempEnd ? tempEnd : totalPage;
         next = totalPage > tempEnd; //전체 페이지가 50인데 현재 페이지의 끝이 20이면 다음 페이지로 이동하는게 가능
 
